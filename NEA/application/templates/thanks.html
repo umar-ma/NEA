@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block content %}
+	<h1 class="border-bottom mb-4">Thank You for shopping</h1>
+
+	<div class="content-section" style="background-color: aliceblue;">
+		<h4>Your Order Details</h4>
+		{% for order in orders %}
+			<div class="content-section">
+				<div class="row">
+					<div class="col-md-4">
+						<img class="border border-secondary" id="product-page-image" src="{{ url_for('static', filename='product_pics/' + order.Product.image_file) }}">	
+					</div>
+					<div class="col-md-8">
+						
+						<h5>{{ order['product_name'] }}</h5>
+						
+						<p class="">Price: £{{ order['price'] }}</p>
+						<p>Quantity Bought: {{ order['quantity'] }}</p>
+						<p>Subtotal: {{ order['subtotal'] }}</p>
+						
+						<small class="text-muted">
+							From: <a href="#">{{ order['Product']['Owner'].firstname }} {{ order['Product']['Owner'].surname }}</a>
+						</small>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+		<b>Discount: £{{ orders[0]['Payment'].discount }}</b>
+		<b class="float-right">Total: £{{ orders[0]['Payment'].total }}</b>
+		
+	</div>
+
+{% endblock %}

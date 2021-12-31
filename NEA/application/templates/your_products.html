@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+{% block content %}
+
+  <div class="content-section">
+    <h1 class="border-bottom mb-4">Your Products</h1>
+
+    <div class="emptycart content-section">
+        <a class="delete rounded-circle btn" href="{{ url_for('delete_all_products') }}" 
+        onclick="return confirm('Are you sure you wish to delete all products this cart?')"><i class="fas fa-trash-alt"></i></a>
+        <p><b>Delete ALL Products</b></p>
+    </div>
+
+    
+
+        {% for product in products %}
+            <div class="content-section">
+                <div class="row">
+                    <div class="col-md-4">
+                        <a href="{{ url_for('product_description', product_id=product['id']) }}">
+                            <img class="border border-secondary" id="product-page-image" src="{{ url_for('static', filename='product_pics/' + product.image_file) }}"> 
+                        </a>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="{{ url_for('product_description', product_id=product['id']) }}">
+                            <h5>{{ product['name'] }}</h5>
+                        </a>
+                        <p class="">Price: £{{ product['price'] }}</p>
+                        <p>Quantity Available: {{ product['quantity'] }}</p>
+                        
+                        <small class="text-muted">
+                            From: <a href="#">{{ product['Owner'].firstname }} {{ product['Owner'].surname }}</a>
+                        </small>
+
+                        <a class="btn btn-dark mt-2" href="{{ url_for('update_product', product_id=product['id']) }}">Update Product</a>
+
+                    </div>
+                    <div class="col-md-4">
+                        
+                        <a class="delete rounded-circle btn" href="{{ url_for('delete_product', product_id=product['id']) }}" 
+                        onclick="return confirm('Are you sure you wish to add remove this item from cart?')"><i class="fas fa-trash-alt"></i></a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        {% endfor %}
+    </form>
+
+  </div>
+
+
+
+{% endblock %}

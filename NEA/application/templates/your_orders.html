@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+{% block content %}
+  
+<h1 class="border-bottom mb-4">Your Orders</h1>
+
+  <div class="content-section" style="background-color: aliceblue;">
+		<h4>Your Order Details</h4>
+		{% for i in orders %}
+			<div class="content-section">
+				<p>Order ({{ i[0]['Payment'].id }}) details</p>
+				{% for j in i %}
+					<div class="row">
+						<div class="col-md-4">
+							{% if j.Product.deleted or j.Product.quantity < 1 %}
+								<img class="border border-secondary" id="product-page-image" 
+								src="{{ url_for('static', filename='product_pics/' + j.Product.image_file) }}">
+							{% else %}
+								<a href="{{ url_for('product_description', product_id=j['product_id']) }}">
+									<img class="border border-secondary" id="product-page-image" 
+									src="{{ url_for('static', filename='product_pics/' + j.Product.image_file) }}">	
+								</a>
+							{% endif %}
+						</div>
+						<div class="col-md-8">
+							{% if j.Product.deleted or j.Product.quantity < 1 %}
+								<h5>{{ j['product_name'] }}</h5>
+							{% else %}
+								<a href="{{ url_for('product_description', product_id=j['product_id']) }}">
+									<h5>{{ j['product_name'] }}</h5>
+								</a>
+							{% endif %}
+		
+							<p class="">Price: £{{ j['price'] }}</p>
+							<p>Quantity Bought: {{ j['quantity'] }}</p>
+							<p>Subtotal: {{ j['subtotal'] }}</p>
+							
+							<small class="text-muted">
+								From: <a href="#">{{ j['Product']['Owner'].firstname }} {{ j['Product']['Owner'].surname }}</a>
+							</small>
+						</div>
+					</div>
+					<br>
+				{% endfor %}
+				<b>Discount: £{{ i[0]['Payment'].discount }}</b>
+				<b class="float-right">Total: £{{ i[0]['Payment'].total }}</b>
+			</div>
+		{% endfor %}
+		
+	</div>
+
+
+
+{% endblock %}

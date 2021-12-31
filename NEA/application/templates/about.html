@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+  <h1 class="border-bottom mb-4">About</h1>
+
+  {% if current_user.is_authenticated and current_user.admin %}
+    <a class="btn btn-dark" href="{{ url_for('change_about') }}">Change about Page with admin access</a>
+  {% endif %}
+
+  <p>{{ content }}</p>
+
+
+  <h5 class="mt-5">Contact us at glamley08@gmail.com</h5>
+
+{% endblock %}
+

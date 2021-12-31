@@ -1,0 +1,87 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+
+
+<h2>Send Coupons</h2>
+
+<script>
+    function check() {
+
+        var table = document.getElementById("table");
+        var length = table.rows.length;
+        var list = []
+        
+
+        for (i = 1; i < length; i++) {
+
+            var checkbox = document.getElementById(i-1);
+            
+            if (checkbox.checked == true){ 
+                console.log(checkbox.checked);
+                var email = table.rows[i].cells[2].innerHTML;
+                console.log(table.rows[i].cells[2].innerHTML);
+                list.push(email)
+            }
+            
+        }
+        document.getElementById("list").value = list
+    }
+
+    </script>
+
+<table id="table">
+    <tr>
+        <th>check</th>
+        <th>User Name</th>
+        <th>User Email</th>
+    </tr>
+
+    {% for i in range(0, length) %}
+        <tr>
+            <td><input type="checkbox" id={{i}} ></td>
+            <td>{{ users[i].firstname }} {{ users[i].surname }}</td>
+            <td>{{ users[i].email }}</td>
+        </tr>
+    {% endfor %}
+
+</table>
+
+
+
+<form method="POST" action="" enctype="">
+
+    <label id="coupon" for="coupon">Coupon:</label>
+
+    <select name="coupon" id="coupon">
+
+    {% for i in range(length,length+length_coupon) %}
+        <option value={{coupons[i-length].id}}>{{ coupons[i-length] }}</option>
+    {% endfor %}
+        
+    </select>
+
+    <input type="hidden" name="list" id="list" value="">
+    <input class="buy-now btn btn-block btn-primary" type="submit" value="Send Coupon" onclick="check()">
+</form>
+
+
+{% endblock %}
+

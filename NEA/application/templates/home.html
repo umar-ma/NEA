@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <style>
+      body{
+        background: url('/static/background.jpg');
+      }
+
+      .home-btn {
+        position: relative;
+        top: 15%;
+        left: 45%;
+      }
+    </style>
+
+    <h1 style="text-align: center; color: rebeccapurple;">Welcome to Glamley</h1>
+    <p class="mt-5" style="text-align: center; color: wheat;">At Glamley, We offer a range of products</p>
+    <p style="text-align: center; color: wheat;">We have a range of deals on our products</p>
+    <p style="text-align: center; color: wheat;">Come shop at Glamley!</p>
+    <!-- style="text-align: center; color: rebeccapurple;" -->
+    <a class="btn btn-outline-light rounded home-btn" href="{{ url_for('products') }}">Shop Now</a>
+
+{% endblock content %}

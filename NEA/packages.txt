@@ -1,0 +1,10 @@
+flask_bcrypt
+flask_sqlalchemy
+flask_login
+flask_wtf
+flask_admin
+stripe
+email_validator
+fuzzywuzzy
+
+python "run.py"

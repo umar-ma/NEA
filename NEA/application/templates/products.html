@@ -1,0 +1,142 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST" action="" enctype="">
+			{{ form.hidden_tag() }}
+			<fieldset class="form-group">
+                <div class="form-group">
+                    <div class="wrapper">
+                        {{ form.search(class="form-control form-control-lg") }}
+                        {{ form.submit(class="btn btn-outline-info") }}
+                    </div>
+				</div>
+            </fieldset>
+        </form>
+    </div>
+
+    <div class="filter-section">
+        <details>
+            <summary id="filter">Filter By  <i class="fas fa-filter fa-3x"></i></summary>
+            <h4 class="m-4 pt-3">Order By</h4>
+        
+            <div class="container content-section filter">
+                
+                <form method="">
+
+                    <div class="row">
+                        <p class="ml-4"><b>Alphabetical Order:</b></p>
+                    </div>
+            
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input class="btn btn-filter" type="submit" name="submit_button" value="Ascending">
+                        </div>
+                    
+                        <div class="col-md-6">
+                            <input class="btn btn-filter" type="submit" name="submit_button" value="Descending">
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <p class="ml-4"><b>Price:</b></p>
+                    </div>
+            
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input class="btn btn-filter" type="submit" name="submit_button" value="Low to High">
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <input class="btn btn-filter" type="submit" name="submit_button" value="High to Low">
+                        </div>
+                    </div>
+            
+                    <div class="row">
+                        <p class="ml-4"><b>Date:</b></p>
+                    </div>
+            
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input class="btn btn-filter" type="submit" name="submit_button" value="Old to New">
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <input class="btn btn-filter" type="submit" name="submit_button" value="New to Old">
+                        </div>
+                    </div>
+
+                </form>
+                
+            </div>
+        </details>
+    </div>
+
+
+    <div class="container">
+        {% if length == 0 %}
+            <h1>No Results Found</h1>
+        {% elif length_p == 0 %}
+            <h1>No Products Available</h1>
+        {% else %}
+            {% for result in results.items %}
+            <div class="content-section">
+                <div class="row">
+                    <div class="col-md-4">
+                        <a href="{{ url_for('product_description', product_id=result['id']) }}">
+                            <img class="border border-secondary" id="product-page-image" src="{{ url_for('static', filename='product_pics/' + result.image_file) }}">
+                        </a>
+                    </div>
+                    <div class="col-md-8">
+                        <a href="{{ url_for('product_description', product_id=result['id']) }}">
+                            <h5>{{ result['name'] }}</h5>
+                        </a>
+                        <p class="">Price: £{{ result['price'] }}</p>
+                        <p>Quantity Available: {{ result['quantity'] }}</p>
+                        
+                        <small class="text-muted">
+                            From: <a href="#">{{ result['Owner'].firstname }} {{ result['Owner'].surname }}</a>
+                        </small>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    {% for page in results.iter_pages(left_edge=3, right_edge=2, left_current=1, right_current=2) %}
+        {% if page %}
+            {% if search %}
+                {% if Filter %}
+                    {% if results.page == page %}
+                        <a class="btn btn-primary mb-3" href="{{ url_for('search_results',query=form.search.data, page=page, Filter=Filter) }}">{{ page }}</a>
+                    {% else %}
+                        <a class="btn btn-outline-primary mb-3" href="{{ url_for('search_results',query=form.search.data, page=page, Filter=Filter) }}">{{ page }}</a>
+                    {% endif %}
+                {% else %}
+                    {% if results.page == page %}
+                        <a class="btn btn-primary mb-3" href="{{ url_for('search_results',query=form.search.data, page=page) }}">{{ page }}</a>
+                    {% else %}
+                        <a class="btn btn-outline-primary mb-3" href="{{ url_for('search_results',query=form.search.data, page=page) }}">{{ page }}</a>
+                    {% endif %}
+                {% endif %}
+            {% else %}
+                {% if Filter %}
+                    {% if results.page == page %}
+                        <a class="btn btn-primary mb-3" href="{{ url_for('products', page=page, Filter=Filter) }}">{{ page }}</a>
+                    {% else %}
+                        <a class="btn btn-outline-primary mb-3" href="{{ url_for('products', page=page, Filter=Filter) }}">{{ page }}</a>
+                    {% endif %}
+                {% else %}
+                    {% if results.page == page %}
+                        <a class="btn btn-primary mb-3" href="{{ url_for('products', page=page) }}">{{ page }}</a>
+                    {% else %}
+                        <a class="btn btn-outline-primary mb-3" href="{{ url_for('products', page=page) }}">{{ page }}</a>
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+        {% else %}
+            ...
+        {% endif %}
+    {% endfor %}
+
+{% endblock %}

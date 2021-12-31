@@ -1,0 +1,123 @@
+{% extends "layout.html" %}
+{% block content %}
+	<div class="content-section">
+
+		<center><h1 class="mb-4">Product Details</h1><center>
+
+		<div class="row">
+			<div class="col">
+				<img class="border border-secondary mb-3 pr-0 mr-0" id="product-description-page-image" 
+				src="{{ url_for('static', filename='product_pics/' + product.image_file) }}">
+			</div>
+			<div class="col">
+				<h5 class="alignleft mb-4">{{ product['name'] }}</h5>
+				<p class="alignleft">Price: £{{ product['price'] }}</p>
+				<p class="alignleft">Quantity Available: {{ product['quantity'] }}</p>
+
+				<form method="post">
+
+					<label id="quantity-selected" for="quantity-selected">Quantity:</label>
+
+					<select name="quantity-selected" id="quantity-selected">
+
+					{% for i in range(1,maximum+1) %}
+						{% if i==9 %}
+							<option value="9+">9+</option>
+						{% else %}
+							<option value={{i}}>{{i}}</option>
+						{% endif %}
+					{% endfor %}
+						
+					</select>
+					
+
+					<input class="buy-now btn btn-block btn-primary" id="buy-now" type="submit" name="submit_button" value="Buy Now">
+					{% if current_user.is_authenticated %}
+						{% if cart %}
+							<input class="add-to-cart btn btn-block btn-primary" id="cart" type="submit" name="submit_button" 
+							value="Remove from Cart" onclick="return confirm('Are you sure you wish to Remove this item from cart?')">		
+						{% else %}
+							<input class="add-to-cart btn btn-block btn-primary" id="cart" type="submit" name="submit_button" 
+							value="Add to Cart" onclick="return confirm('Are you sure you wish to add this item to cart?')">
+						{% endif %}
+					{% else %}
+						<input class="add-to-cart btn btn-block btn-primary" id="cart" type="submit" name="submit_button" 
+						value="Add to Cart" onclick="return confirm('Are you sure you wish to add this item to cart?')">
+					{% endif %}
+
+				</form>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="alignleft col-12">
+				<h5>Description:</h5>
+			</div>
+		</div>
+		<div class="row">
+			<div class="description-box alignleft col-12 border">
+				{% if product.description %}
+					<p class="">{{ product['description'] }}</p>
+				{% else %}
+					<p>No description available</p>
+				{% endif %}
+			</div>
+		</div>
+		
+	
+	</div>
+
+	<div class="content-section">
+
+		<form method="POST" action="" enctype="">
+			{{ form.hidden_tag() }}
+			<fieldset class="form-group">
+				<div class="form-group">
+					
+					{% if form.comment.errors %}
+						{{ form.comment(class="form-control form-control-lg is-invalid") }}
+						<div class="invalid-feedback">
+							{% for error in form.comment.errors %}
+								<span>{{ error }}</span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.comment(class="form-control form-control-lg") }}
+					{% endif %}
+				</div>
+
+				<div class="form-group">
+					{{ form.submit(class="btn btn-outline-info") }}
+				</div>
+			</fieldset>
+		</form>
+	
+	</div>
+
+	<div class="content-section">
+
+		{% for comment in comments %}
+			
+				<div class="row border-bottom">
+					<div class="col-2 p-2">
+						<img class="comment-img rounded-circle" src="{{ url_for('static', filename='profile_pics/' + comment['Owner'].image_file) }}">
+					</div>
+					<div class="col-10">
+						{% if current_user == comment['Owner'] %}
+							<a>{{ comment['Owner'].firstname }} {{ comment['Owner'].surname }} <b>(You)</b></a>
+						{% elif comment['Owner'] == product['Owner'] %}
+							<a>{{ comment['Owner'].firstname }} {{ comment['Owner'].surname }} <b>(Owner)</b></a>
+						{% else %}
+							<a>{{ comment['Owner'].firstname }} {{ comment['Owner'].surname }}</a>
+						{% endif %}
+						<br>
+						<small class="text-muted">{{ comment['date_set'].strftime("%B %d, %Y") }}</small>
+						<p class="mt-3">{{comment['comment']}}</p>
+					</div>
+				</div>
+			
+		{% endfor %}
+		
+	</div>
+
+{% endblock %}

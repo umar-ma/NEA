@@ -1,0 +1,240 @@
+body {
+  background: #fafafa;
+  color: #333333;
+  margin-top: 5rem;
+}
+
+.navbar {
+  background-color: #1b3242;
+}
+
+.nav-link {
+  color: black;
+}
+
+.nav-link:active{
+  color: white;
+}
+
+.nav-link:hover {
+  color: white;
+}
+
+
+.content-section {
+  background: #ffffff;
+  padding: 10px 20px;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+  margin-bottom: 20px;
+}
+
+
+
+.account-img {
+  height: 125px;
+  width: 125px;
+  margin-right: 20px;
+  margin-bottom: 16px;
+}
+
+.account-heading {
+  font-size: 2.5rem;
+}
+
+
+.image-preview {
+  width: 200px;
+  min-height: 100px;
+  border: 2px solid #dddddd;
+  margin-top: 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #cccccc;
+}
+
+.image-preview__image {
+  display: none;
+  width: 200px;
+  height: 200px;
+}
+
+.image-preview__default-image {
+  width: 200px;
+  height: 200px;
+}
+
+.wrapper{
+	position: relative;
+  max-width: 700px;
+  width: 100%;
+  display: flex;
+}
+
+.wrapper .input {
+  width: 85%;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+#product-page-image{
+  width: 200px;
+  height: 200px;
+}
+
+#product-description-page-image{
+  width: 300px;
+  height: 300px;
+}
+
+.alignleft {
+  text-align: left;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.buy-now {
+  color: black;
+}
+
+.buy-now:hover {
+  color: white;
+}
+
+.add-to-cart {
+  color: black;
+}
+
+.add-to-cart:hover {
+  color: white;
+}
+
+#quantity-selected {
+ float: left;
+ text-decoration: none;
+}
+
+.comment-img {
+  height: 50px;
+  width: 50px;
+}
+
+.description-box {
+  min-height: 100px;
+  padding-top: 5px;
+  word-wrap: break-word;
+}
+
+.delete{
+  float: right;
+  position: relative;
+  background-color: aliceblue;
+}
+
+.emptycart{
+  background-color: lemonchiffon;
+}
+
+
+.to-checkout {
+  color: black;
+  background-color: lightblue;
+  border-color: lightblue;
+}
+
+.to-checkout:hover {
+  color: white;
+  background-color: lightblue;
+  border-color: lightblue;
+}
+
+
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+details {
+  border: none;
+}
+
+
+
+details[open] > summary {
+  background-color: #ccf;
+  border: black solid;
+}
+
+details[open] {
+  background-color: rgb(189, 189, 255);
+}
+
+#filter {
+  color: gray;
+  float: right;
+  padding: 3px;
+  border: black solid;
+  background-color: #ccf
+}
+
+.filter {
+  background-color: #ccf;
+}
+
+.btn-filter {
+  border-radius: 30px;
+  background: linear-gradient(90deg,#7a7396,#4920eb);
+}
+
+.btn-filter:hover {
+  border-radius: 30px;
+  background: linear-gradient(90deg,#896ff0,#7a7396);
+}
+
+
+.filter-section {
+  margin-bottom: 10px;
+  overflow: auto;
+}
+
+.change_password{
+  width: auto;
+  min-width: 200px;
+  padding: 3px;
+  margin: 3px;
+}
+
+#change_password_submit:hover{
+  background-color: azure;
+  cursor: pointer;
+}
+
+#hover{
+  background-color: azure;
+  border-color: bisque;
+}
+
+#hover:hover {
+  cursor: pointer;
+  background-color: rgb(185, 241, 241);
+  border-color: cornflowerblue;
+}
+
+#cpbtn {
+  width: 100%;
+  margin-bottom: 3px;
+  color: #1b3242;
+  background-color: aliceblue;
+  border-color: darkslategray;
+}
+
+#cpbtn:hover {
+  width: 100%;
+  margin-bottom: 3px;
+  color:azure;
+  background-color: cornflowerblue;
+  
+}

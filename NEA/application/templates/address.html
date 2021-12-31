@@ -1,0 +1,93 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="content-section">
+
+	<form method="POST" action="" enctype="">
+		{{ form.hidden_tag() }}
+		<fieldset class="form-group">
+			<legend class="border-bottom mb-4">Address</legend>
+
+			<div class="form-group">
+				{{ form.homeNumber.label(class="form-control-label") }}
+				
+				</br>
+
+				{% if form.homeNumber.errors %}
+					{{ form.homeNumber(class="form-control form-control-lg is-invalid") }}
+					<div class="invalid-feedback">
+						{% for error in form.homeNumber.errors %}
+							<span>{{ error }}</span>
+						{% endfor %}
+					</div>
+				{% else %}
+					{{ form.homeNumber(class="form-control form-control-lg") }}
+				{% endif %}
+			</div>
+
+			<div class="form-group">
+				{{ form.streetAddr.label(class="form-control-label") }}
+				
+				{% if form.streetAddr.errors %}
+					{{ form.streetAddr(class="form-control form-control-lg is-invalid") }}
+					<div class="invalid-feedback">
+						{% for error in form.streetAddr.errors %}
+							<span>{{ error }}</span>
+						{% endfor %}
+					</div>
+				{% else %}
+					{{ form.streetAddr(class="form-control form-control-lg") }}
+				{% endif %}
+			</div>
+
+			<div class="form-group">
+				{{ form.country.label(class="form-control-label") }}
+				
+				{% if form.country.errors %}
+					{{ form.country(class="form-control form-control-lg is-invalid") }}
+					<div class="invalid-feedback">
+						{% for error in form.country.errors %}
+							<span>{{ error }}</span>
+						{% endfor %}
+					</div>
+				{% else %}
+					{{ form.country(class="form-control form-control-lg") }}
+				{% endif %}
+			</div>
+
+			<div class="form-group">
+				{{ form.city.label(class="form-control-label") }}
+				
+				{% if form.city.errors %}
+					{{ form.city(class="form-control form-control-lg is-invalid") }}
+					<div class="invalid-feedback">
+						{% for error in form.city.errors %}
+							<span>{{ error }}</span>
+						{% endfor %}
+					</div>
+				{% else %}
+					{{ form.city(class="form-control form-control-lg") }}
+				{% endif %}
+			</div>
+
+			<div class="form-group">
+				{{ form.postcode.label(class="form-control-label") }}
+				
+				{% if form.postcode.errors %}
+					{{ form.postcode(class="form-control form-control-lg is-invalid") }}
+					<div class="invalid-feedback">
+						{% for error in form.postcode.errors %}
+							<span>{{ error }}</span>
+						{% endfor %}
+					</div>
+				{% else %}
+					{{ form.postcode(class="form-control form-control-lg") }}
+				{% endif %}
+			</div>
+
+		</fieldset>
+		<div class="form-group">
+			{{ form.checkout(class="btn btn-outline-info") }}
+		</div>
+	</form>
+</div>
+{% endblock %}
